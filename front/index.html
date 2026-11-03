@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#080808">
+    <meta
+      name="description"
+      content="ROVIX conecta comerciantes, operadores e consumidores em uma experiência demonstrativa de logística inteligente."
+    >
+    <title>ROVIX — Logística inteligente</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="rovix-api.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="ROVIX — início" data-home-link>
+          <span class="brand-name">ROVIX<span class="brand-period">.</span></span>
+        </a>
+        <span class="header-label">LOGÍSTICA INTELIGENTE</span>
+      </header>
+
+      <section class="view view-home" id="home-view" aria-labelledby="page-title">
+        <div class="intro">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> LOGÍSTICA DE NOVA GERAÇÃO</p>
+          <h1 id="page-title">O futuro das entregas<br>começa <span>agora.</span></h1>
+          <p class="intro-copy">
+            Uma nova perspectiva para conectar encomendas, pessoas e destinos.
+            Escolha como você quer acessar a plataforma.
+          </p>
+        </div>
+
+        <div class="section-heading">
+          <h2>ACESSE A PLATAFORMA</h2>
+          <span>SELECIONE SEU PERFIL</span>
+        </div>
+
+        <div class="profile-grid">
+          <button class="profile-card" type="button" data-profile="merchant">
+            <span class="card-topline">
+              <span class="profile-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M3.5 9.5h17l-1.4 10h-14l-1.6-10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M8 9.5 10 4h4l2 5.5M9 13v3m6-3v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="card-arrow" aria-hidden="true">↗</span>
+            </span>
+            <span class="card-title">Comerciante</span>
+            <span class="card-description">Cadastre e acompanhe encomendas.</span>
+          </button>
+
+          <button class="profile-card" type="button" data-profile="operator">
+            <span class="card-topline">
+              <span class="profile-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3.5 19 6v5.1c0 4.3-2.8 7.5-7 9.4-4.2-1.9-7-5.1-7-9.4V6l7-2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="m8.8 11.8 2.1 2.1 4.5-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="card-arrow" aria-hidden="true">↗</span>
+            </span>
+            <span class="card-title">Operador</span>
+            <span class="card-description">Gerencie entregas e consulte rotas.</span>
+          </button>
+
+          <button class="profile-card" type="button" data-profile="consumer">
+            <span class="card-topline">
+              <span class="profile-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M20 10.2c0 5-8 10.3-8 10.3S4 15.2 4 10.2a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+                </svg>
+              </span>
+              <span class="card-arrow" aria-hidden="true">↗</span>
+            </span>
+            <span class="card-title">Consumidor</span>
+            <span class="card-description">Rastreie sua encomenda.</span>
+          </button>
+
+          <button class="profile-card" type="button" data-profile="authorities">
+            <span class="card-topline">
+              <span class="profile-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="m12 3 8 4.2v5.2c0 4.1-3.1 7-8 8.6-4.9-1.6-8-4.5-8-8.6V7.2L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M12 8v4m0 3h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="card-arrow" aria-hidden="true">↗</span>
+            </span>
+            <span class="card-title">Autoridades</span>
+            <span class="card-description">Consulte registros e ocorrências autorizadas.</span>
+          </button>
+        </div>
+
+        <p class="demo-note"><span aria-hidden="true">ⓘ</span> Ambiente demonstrativo. As funcionalidades estão em desenvolvimento.</p>
+      </section>
+
+      <section class="view view-profile" id="profile-view" aria-labelledby="profile-title" hidden>
+        <button class="back-button" type="button" data-back>
+          <span aria-hidden="true">←</span> Voltar ao início
+        </button>
+        <p class="api-banner" id="api-banner" role="alert" hidden></p>
+        <section class="merchant-dashboard" id="merchant-dashboard" aria-labelledby="merchant-title" hidden>
+          <div class="dashboard-heading">
+            <div>
+              <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> VISÃO GERAL DA OPERAÇÃO</p>
+              <h1 id="merchant-title" tabindex="-1">Painel do Comerciante</h1>
+              <p class="dashboard-subtitle">Acompanhe seus pedidos de entrega em um só lugar.</p>
+            </div>
+            <span class="role-badge"><span aria-hidden="true">●</span> PERFIL COMERCIANTE</span>
+          </div>
+
+          <section class="metrics-grid" aria-label="Resumo de pedidos — dados ilustrativos">
+            <article class="metric-card">
+              <span class="metric-label">Total de pedidos</span>
+              <strong class="metric-value">24</strong>
+              <span class="metric-footnote">no período demonstrativo</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Pedidos pendentes</span>
+              <strong class="metric-value">08</strong>
+              <span class="metric-footnote"><span class="metric-indicator pending-indicator"></span> aguardando coleta</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Em andamento</span>
+              <strong class="metric-value">11</strong>
+              <span class="metric-footnote"><span class="metric-indicator progress-indicator"></span> em rota de entrega</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Concluídos</span>
+              <strong class="metric-value">05</strong>
+              <span class="metric-footnote"><span class="metric-indicator complete-indicator"></span> entregues</span>
+            </article>
+          </section>
+
+          <section class="orders-section" aria-labelledby="orders-title">
+            <div class="orders-heading">
+              <div>
+                <h2 id="orders-title">Pedidos de entrega</h2>
+                <p>Consulte os pedidos recentes da sua operação.</p>
+              </div>
+              <button class="primary-button new-order-button" type="button" data-open-order>
+                <span aria-hidden="true">＋</span> Novo pedido
+              </button>
+            </div>
+
+            <div class="orders-toolbar">
+              <label class="search-field">
+                <span class="visually-hidden">Pesquisar pedidos</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+                <input type="search" placeholder="Buscar por código ou destinatário" autocomplete="off">
+              </label>
+              <div class="status-filters" aria-label="Filtrar por status">
+                <button class="filter-chip is-selected" type="button" aria-pressed="true">Todos <span>24</span></button>
+                <button class="filter-chip" type="button" aria-pressed="false">Pendentes</button>
+                <button class="filter-chip" type="button" aria-pressed="false">Em andamento</button>
+                <button class="filter-chip" type="button" aria-pressed="false">Concluídos</button>
+              </div>
+            </div>
+
+            <div class="orders-table-wrap">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Pedido</th>
+                    <th scope="col">Destinatário</th>
+                    <th scope="col">Endereço de destino</th>
+                    <th scope="col">Prioridade</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"><span class="visually-hidden">Ações</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Pedido"><span class="order-code">#RV-2048</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Marina Costa</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Rua das Palmeiras, 142 <span>Vila Aurora</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag">Normal</span></td>
+                    <td data-label="Status"><span class="status-tag status-pending"><span aria-hidden="true">●</span> Pendente</span></td>
+                    <td data-label="Ações"><button class="row-action" type="button" aria-label="Ações para o pedido RV-2048" disabled>•••</button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Pedido"><span class="order-code">#RV-2047</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Lucas Ferreira</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Av. das Acácias, 580 <span>Jardim Central</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag priority-high">Alta</span></td>
+                    <td data-label="Status"><span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span></td>
+                    <td data-label="Ações"><button class="row-action" type="button" aria-label="Ações para o pedido RV-2047" disabled>•••</button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Pedido"><span class="order-code">#RV-2046</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Beatriz Almeida</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Rua do Ipê, 36 <span>Parque Horizonte</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag">Normal</span></td>
+                    <td data-label="Status"><span class="status-tag status-complete"><span aria-hidden="true">●</span> Concluído</span></td>
+                    <td data-label="Ações"><button class="row-action" type="button" aria-label="Ações para o pedido RV-2046" disabled>•••</button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Pedido"><span class="order-code">#RV-2045</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Rafael Nunes</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Alameda dos Jasmins, 911 <span>Centro</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag priority-high">Alta</span></td>
+                    <td data-label="Status"><span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span></td>
+                    <td data-label="Ações"><button class="row-action" type="button" aria-label="Ações para o pedido RV-2045" disabled>•••</button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Pedido"><span class="order-code">#RV-2044</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Camila Ribeiro</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Travessa do Sol, 75 <span>Jardim das Flores</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag">Normal</span></td>
+                    <td data-label="Status"><span class="status-tag status-pending"><span aria-hidden="true">●</span> Pendente</span></td>
+                    <td data-label="Ações"><button class="row-action" type="button" aria-label="Ações para o pedido RV-2044" disabled>•••</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="demo-data-note">Dados gerados pela simulação do sistema ROVIX (demonstração acadêmica).</p>
+          </section>
+        </section>
+
+        <section class="operator-dashboard" id="operator-dashboard" aria-labelledby="operator-title" hidden>
+          <div class="dashboard-heading">
+            <div>
+              <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> VISÃO GERAL DA OPERAÇÃO</p>
+              <h1 id="operator-title" tabindex="-1">Painel do Operador</h1>
+              <p class="dashboard-subtitle">Acompanhe suas entregas e consulte as informações da rota.</p>
+            </div>
+            <span class="role-badge"><span aria-hidden="true">●</span> PERFIL OPERADOR</span>
+          </div>
+
+          <section class="metrics-grid" aria-label="Resumo de entregas — dados ilustrativos">
+            <article class="metric-card">
+              <span class="metric-label">Entregas atribuídas</span>
+              <strong class="metric-value">12</strong>
+              <span class="metric-footnote">no período demonstrativo</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Entregas pendentes</span>
+              <strong class="metric-value">03</strong>
+              <span class="metric-footnote"><span class="metric-indicator pending-indicator"></span> aguardando início</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Em andamento</span>
+              <strong class="metric-value">05</strong>
+              <span class="metric-footnote"><span class="metric-indicator progress-indicator"></span> em rota</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Concluídas</span>
+              <strong class="metric-value">04</strong>
+              <span class="metric-footnote"><span class="metric-indicator complete-indicator"></span> finalizadas</span>
+            </article>
+          </section>
+
+          <section class="orders-section operator-deliveries" aria-labelledby="deliveries-title">
+            <div class="orders-heading">
+              <div>
+                <h2 id="deliveries-title">Minhas entregas</h2>
+                <p>Entregas atribuídas para acompanhamento.</p>
+              </div>
+            </div>
+
+            <div class="orders-toolbar">
+              <label class="search-field">
+                <span class="visually-hidden">Pesquisar entregas</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+                <input type="search" placeholder="Buscar por código ou destinatário" autocomplete="off">
+              </label>
+              <div class="status-filters" aria-label="Filtrar entregas por status">
+                <button class="filter-chip is-selected" type="button" aria-pressed="true">Todas <span>12</span></button>
+                <button class="filter-chip" type="button" aria-pressed="false">Pendentes</button>
+                <button class="filter-chip" type="button" aria-pressed="false">Em andamento</button>
+                <button class="filter-chip" type="button" aria-pressed="false">Concluídas</button>
+                <button class="filter-chip" type="button" aria-pressed="false">Atrasadas</button>
+              </div>
+            </div>
+
+            <div class="orders-table-wrap">
+              <table class="orders-table delivery-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Entrega</th>
+                    <th scope="col">Destinatário</th>
+                    <th scope="col">Endereço de destino</th>
+                    <th scope="col">Prioridade</th>
+                    <th scope="col">Status atual</th>
+                    <th scope="col">Detalhes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#DR-3108</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Helena Martins</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Rua dos Pinheiros, 218 <span>Jardim Aurora</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag">Normal</span></td>
+                    <td data-label="Status atual"><span class="status-tag status-pending"><span aria-hidden="true">●</span> Pendente</span></td>
+                    <td data-label="Detalhes"><button class="view-details-button" type="button" data-delivery-details data-code="#DR-3108" data-recipient="Helena Martins" data-address="Rua dos Pinheiros, 218 — Jardim Aurora" data-priority="Normal" data-status="Pendente">Ver detalhes <span aria-hidden="true">↗</span></button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#DR-3107</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">André Lima</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Av. Horizonte, 640 <span>Vila Serena</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag priority-high">Alta</span></td>
+                    <td data-label="Status atual"><span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span></td>
+                    <td data-label="Detalhes"><button class="view-details-button" type="button" data-delivery-details data-code="#DR-3107" data-recipient="André Lima" data-address="Av. Horizonte, 640 — Vila Serena" data-priority="Alta" data-status="Em andamento">Ver detalhes <span aria-hidden="true">↗</span></button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#DR-3106</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Sofia Mendes</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Rua do Cedro, 51 <span>Parque das Águas</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag">Normal</span></td>
+                    <td data-label="Status atual"><span class="status-tag status-complete"><span aria-hidden="true">●</span> Concluída</span></td>
+                    <td data-label="Detalhes"><button class="view-details-button" type="button" data-delivery-details data-code="#DR-3106" data-recipient="Sofia Mendes" data-address="Rua do Cedro, 51 — Parque das Águas" data-priority="Normal" data-status="Concluída">Ver detalhes <span aria-hidden="true">↗</span></button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#DR-3105</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Thiago Barros</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Alameda Verde, 903 <span>Centro</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag priority-high">Alta</span></td>
+                    <td data-label="Status atual"><span class="status-tag status-delayed"><span aria-hidden="true">●</span> Atrasada</span></td>
+                    <td data-label="Detalhes"><button class="view-details-button" type="button" data-delivery-details data-code="#DR-3105" data-recipient="Thiago Barros" data-address="Alameda Verde, 903 — Centro" data-priority="Alta" data-status="Atrasada">Ver detalhes <span aria-hidden="true">↗</span></button></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#DR-3104</span></td>
+                    <td data-label="Destinatário"><span class="recipient-name">Isabela Rocha</span></td>
+                    <td data-label="Endereço de destino" class="address-cell">Travessa do Lago, 74 <span>Jardim Novo</span></td>
+                    <td data-label="Prioridade"><span class="priority-tag">Normal</span></td>
+                    <td data-label="Status atual"><span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span></td>
+                    <td data-label="Detalhes"><button class="view-details-button" type="button" data-delivery-details data-code="#DR-3104" data-recipient="Isabela Rocha" data-address="Travessa do Lago, 74 — Jardim Novo" data-priority="Normal" data-status="Em andamento">Ver detalhes <span aria-hidden="true">↗</span></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="demo-data-note">Dados gerados pela simulação do sistema ROVIX (demonstração acadêmica).</p>
+          </section>
+
+          <section class="route-section" aria-labelledby="route-title">
+            <div class="route-heading">
+              <div>
+                <h2 id="route-title">Rota de entrega</h2>
+                <p>Visualização esquemática dos destinos da operação.</p>
+              </div>
+              <span class="illustrative-badge">ROTA ESQUEMÁTICA</span>
+            </div>
+            <div class="route-layout">
+              <div class="route-map" role="img" aria-label="Mapa esquemático ilustrativo com origem e três destinos conectados por uma rota">
+                <svg class="route-map-art" viewBox="0 0 720 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <path class="map-block" d="M-20 24 138 4l47 67-69 42-148-9Zm222-16 150-20 58 76-128 36-79-29Zm252 6 127-18 83 65-48 61-157-26ZM-8 145l136-19 64 72-35 93-133 41Zm226-29 122-32 84 78-49 77-150-11-49-54Zm242-11 164 30 55 74-82 60-140-38-38-58ZM94 291l23-72 141 13 54 74-105 27Zm274 18 21-77 122-16 73 70-89 51Z"/>
+                  <path class="map-road" d="m-4 123 166-18 60 39 105-45 82 40 122-28 199 36M-7 252l129-34 91 17 74-75 102 20 85-54 101 21 145-49M182 0l-7 83 52 60-29 71 39 85m231-268-28 94 48 59-25 86M405 0l24 69-49 70 27 76-11 101"/>
+                  <path class="map-route" d="M108 209 C166 206 181 126 263 137 S355 218 409 181 472 85 541 112"/>
+                  <circle class="route-stop-halo" cx="263" cy="137" r="11"/>
+                  <circle class="route-stop" cx="263" cy="137" r="5"/>
+                  <circle class="route-stop-halo" cx="409" cy="181" r="11"/>
+                  <circle class="route-stop" cx="409" cy="181" r="5"/>
+                  <circle class="route-stop-halo" cx="541" cy="112" r="11"/>
+                  <circle class="route-stop" cx="541" cy="112" r="5"/>
+                  <rect class="route-origin" x="96" y="197" width="24" height="24" rx="6"/>
+                  <path class="origin-mark" d="M108 203v12m-6-6h12"/>
+                </svg>
+                <div class="map-caption"><span class="map-origin-key"></span> Base de operação</div>
+                <div class="route-legend" aria-label="Legenda do mapa">
+                  <span><i class="legend-origin"></i> Origem</span>
+                  <span><i class="legend-destination"></i> Destinos</span>
+                  <span><i class="legend-route"></i> Percurso ilustrativo</span>
+                </div>
+              </div>
+
+              <aside class="route-sidebar" aria-label="Resumo e sequência da rota ilustrativa">
+                <div class="route-metrics">
+                  <article class="route-metric"><span>Distância estimada</span><strong>8,4 <small>km</small></strong></article>
+                  <article class="route-metric"><span>Tempo estimado</span><strong>32 <small>min</small></strong></article>
+                  <article class="route-metric"><span>Paradas</span><strong>03 <small>destinos</small></strong></article>
+                </div>
+                <div class="route-stops">
+                  <h3>Sequência de destinos</h3>
+                  <ol>
+                    <li><span class="stop-number">01</span><span><strong>Helena Martins</strong><small>Rua dos Pinheiros, 218</small></span></li>
+                    <li><span class="stop-number">02</span><span><strong>André Lima</strong><small>Av. Horizonte, 640</small></span></li>
+                    <li><span class="stop-number">03</span><span><strong>Isabela Rocha</strong><small>Travessa do Lago, 74</small></span></li>
+                  </ol>
+                </div>
+              </aside>
+            </div>
+            <p class="route-note">Mapa esquemático. Distância, tempo e paradas são calculados pela simulação a partir das rotas ativas.</p>
+          </section>
+        </section>
+
+        <section class="consumer-dashboard" id="consumer-dashboard" aria-labelledby="consumer-title" hidden>
+          <div class="consumer-heading">
+            <div>
+              <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> ACOMPANHAMENTO DE ENTREGA</p>
+              <h1 id="consumer-title" tabindex="-1">Acompanhe sua entrega</h1>
+              <p class="dashboard-subtitle">Consulte o andamento da entrega usando o código de rastreamento que você recebeu.</p>
+            </div>
+            <span class="role-badge"><span aria-hidden="true">●</span> PERFIL CONSUMIDOR</span>
+          </div>
+
+          <section class="tracking-search-panel" aria-labelledby="tracking-search-title">
+            <div class="tracking-search-copy">
+              <span class="tracking-search-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <div>
+                <h2 id="tracking-search-title">Encontre sua encomenda</h2>
+                <p>Digite o código de rastreamento para consultar uma entrega.</p>
+              </div>
+            </div>
+            <form class="tracking-form">
+              <label class="visually-hidden" for="tracking-code">Código de rastreamento</label>
+              <input id="tracking-code" name="tracking-code" type="text" placeholder="Ex.: RVX-2048-AB" autocomplete="off">
+              <button class="primary-button" type="submit">Rastrear entrega</button>
+            </form>
+            <p class="tracking-hint"><span aria-hidden="true">ⓘ</span> Você encontra o código no comprovante ou na mensagem de confirmação do pedido.</p>
+            <p class="tracking-message" id="tracking-message" role="alert" hidden></p>
+          </section>
+
+          <section class="tracking-result" id="tracking-result" aria-labelledby="tracking-result-title" hidden>
+            <div class="tracking-result-heading">
+              <div>
+                <p class="eyebrow">ENTREGA LOCALIZADA <span class="demo-label">DEMONSTRAÇÃO</span></p>
+                <h2 id="tracking-result-title">Detalhes do acompanhamento</h2>
+              </div>
+              <span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span>
+            </div>
+
+            <div class="tracking-summary">
+              <article class="tracking-code-card">
+                <span class="tracking-detail-label">CÓDIGO DE RASTREAMENTO</span>
+                <strong>RVX-2048-AB</strong>
+                <span class="tracking-code-caption">Entrega simulada</span>
+              </article>
+              <article class="tracking-info-card">
+                <span class="tracking-detail-label">DESTINATÁRIO</span>
+                <strong>Marina Costa</strong>
+                <span class="tracking-detail-secondary">Entrega em andamento</span>
+              </article>
+              <article class="tracking-info-card">
+                <span class="tracking-detail-label">PREVISÃO DE CHEGADA</span>
+                <strong>Hoje, até 16h30</strong>
+                <span class="tracking-detail-secondary">Estimativa da simulação</span>
+              </article>
+              <article class="tracking-info-card tracking-address-card">
+                <span class="tracking-detail-label">ENDEREÇO DE DESTINO</span>
+                <strong>Rua das Palmeiras, 142</strong>
+                <span class="tracking-detail-secondary">Vila Aurora</span>
+              </article>
+              <article class="tracking-info-card">
+                <span class="tracking-detail-label">PRIORIDADE</span>
+                <strong><span class="priority-tag priority-high">Alta</span></strong>
+                <span class="tracking-detail-secondary">Prioridade da entrega</span>
+              </article>
+            </div>
+
+            <section class="timeline-section" aria-labelledby="timeline-title">
+              <div class="consumer-section-heading">
+                <div>
+                  <h3 id="timeline-title">Etapas da entrega</h3>
+                  <p>Acompanhe o progresso desta encomenda.</p>
+                </div>
+                <span class="timeline-current"><span class="metric-indicator progress-indicator"></span> Etapa atual: drone em rota</span>
+              </div>
+              <ol class="delivery-timeline">
+                <li class="timeline-step is-complete">
+                  <span class="timeline-marker" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="timeline-step-copy"><strong>Pedido recebido</strong><small>Pedido confirmado</small></span>
+                </li>
+                <li class="timeline-step is-complete">
+                  <span class="timeline-marker" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="timeline-step-copy"><strong>Pedido preparado</strong><small>Encomenda pronta</small></span>
+                </li>
+                <li class="timeline-step is-current" aria-current="step">
+                  <span class="timeline-marker" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M3.5 12h4l2-5 4.5 10 2-5h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="timeline-step-copy"><strong>Drone em rota</strong><small>A caminho do destino</small></span>
+                </li>
+                <li class="timeline-step">
+                  <span class="timeline-marker" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  </span>
+                  <span class="timeline-step-copy"><strong>Entrega concluída</strong><small>Aguardando entrega</small></span>
+                </li>
+              </ol>
+              <div class="tracking-events-wrap">
+                <h3>Histórico da entrega</h3>
+                <ol class="tracking-events" id="tracking-events"></ol>
+              </div>
+              <p class="tracking-disclaimer">Demonstração acadêmica: posição, progresso e horários são simulados pelo sistema, sem GPS nem drones reais.</p>
+            </section>
+          </section>
+
+          <section class="consumer-route-section" id="consumer-route-section" aria-labelledby="consumer-route-title" hidden>
+            <div class="route-heading">
+              <div>
+                <h2 id="consumer-route-title">Percurso da entrega</h2>
+                <p>Representação visual do trajeto entre a origem e o destino.</p>
+              </div>
+              <span class="illustrative-badge">MAPA ESQUEMÁTICO</span>
+            </div>
+            <div class="consumer-route-layout">
+              <div class="consumer-route-map" role="img" aria-label="Mapa esquemático ilustrativo mostrando o percurso da origem até o destino, com um marcador de drone">
+                <svg class="consumer-map-art" viewBox="0 0 720 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <path class="consumer-map-block" d="m-20 15 135-29 65 64-35 60-173-8Zm219-3 122-19 81 57-46 70-115-17-65-35Zm219-1 116-26 82 64-26 65-147-6-38-48ZM-6 146l143-27 56 66-39 99-160 26Zm218-20 130-16 56 64-49 90-142-20-26-52Zm242-22 146 6 80 77-54 74-145-26-41-59ZM52 294l40-76 147 12 57 74Zm296 9 44-84 117-6 58 67-99 39Z"/>
+                  <path class="consumer-map-road" d="m-8 126 148-18 50 42 100-31 81 42 103-28 251 27M-6 254l112-25 98 18 57-69 110 17 81-54 119 27 147-45M177-4l-10 91 45 63-28 74 42 75m217-302-27 99 53 53-30 83M405-1l12 66-43 69 37 78-14 90"/>
+                  <path class="consumer-route-path" d="M130 213 C195 213 207 132 285 138 S386 211 443 171 518 91 602 112"/>
+                  <circle class="consumer-origin-halo" cx="130" cy="213" r="12"/>
+                  <circle class="consumer-origin-point" cx="130" cy="213" r="5"/>
+                  <circle class="consumer-destination-halo" cx="602" cy="112" r="13"/>
+                  <circle class="consumer-destination-point" cx="602" cy="112" r="6"/>
+                  <g class="consumer-drone" transform="translate(443 171)">
+                    <circle r="15"/>
+                    <path d="M-7 0h14M0-5v10M-5-7l-4-3m14 3 4-3M-5 7l-4 3m14-3 4 3"/>
+                    <circle cx="-9" cy="-10" r="2"/><circle cx="9" cy="-10" r="2"/><circle cx="-9" cy="10" r="2"/><circle cx="9" cy="10" r="2"/>
+                  </g>
+                </svg>
+                <span class="consumer-map-label origin-label"><i></i> Origem</span>
+                <span class="consumer-map-label destination-label"><i></i> Destino</span>
+                <div class="consumer-map-legend"><span><i class="legend-origin"></i> Ponto de origem</span><span><i class="consumer-legend-destination"></i> Destino da entrega</span><span><i class="legend-route"></i> Percurso ilustrativo</span></div>
+              </div>
+              <aside class="consumer-route-info">
+                <span class="tracking-detail-label">DESTINO DA ENCOMENDA</span>
+                <strong>Marina Costa</strong>
+                <p>Rua das Palmeiras, 142<br>Vila Aurora</p>
+                <div class="route-info-divider"></div>
+                <span class="route-info-status"><span class="metric-indicator progress-indicator"></span> Percurso simulado</span>
+              </aside>
+            </div>
+            <p class="tracking-disclaimer">Mapa esquemático: a posição do drone é simulada pelo sistema e não utiliza GPS.</p>
+          </section>
+        </section>
+
+        <section class="authorities-dashboard" id="authorities-dashboard" aria-labelledby="authorities-title" hidden>
+          <div class="dashboard-heading">
+            <div>
+              <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> CONSULTA DEMONSTRATIVA</p>
+              <h1 id="authorities-title" tabindex="-1">Painel de Autoridades</h1>
+              <p class="dashboard-subtitle">Consulte registros fictícios de entregas, voos e ocorrências da operação.</p>
+            </div>
+            <span class="role-badge"><span aria-hidden="true">●</span> PERFIL AUTORIDADES</span>
+          </div>
+
+          <section class="metrics-grid authority-metrics" aria-label="Resumo de registros — dados ilustrativos">
+            <article class="metric-card">
+              <span class="metric-label">Entregas registradas</span>
+              <strong class="metric-value">128</strong>
+              <span class="metric-footnote">registros demonstrativos</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Voos registrados</span>
+              <strong class="metric-value">96</strong>
+              <span class="metric-footnote">operações fictícias</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Ocorrências em aberto</span>
+              <strong class="metric-value">03</strong>
+              <span class="metric-footnote"><span class="metric-indicator pending-indicator"></span> abertas ou em análise</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Ocorrências resolvidas</span>
+              <strong class="metric-value">17</strong>
+              <span class="metric-footnote"><span class="metric-indicator complete-indicator"></span> demonstração</span>
+            </article>
+          </section>
+
+          <section class="orders-section authority-records" aria-labelledby="authority-deliveries-title">
+            <div class="orders-heading">
+              <div>
+                <h2 id="authority-deliveries-title">Registros de entregas</h2>
+                <p>Consulta visual de registros fictícios da operação.</p>
+              </div>
+              <span class="illustrative-badge">DADOS FICTÍCIOS</span>
+            </div>
+            <div class="orders-toolbar">
+              <label class="search-field">
+                <span class="visually-hidden">Pesquisar registros de entrega</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+                <input type="search" placeholder="Buscar por código ou região" autocomplete="off">
+              </label>
+              <div class="status-filters" aria-label="Filtrar registros por status">
+                <button class="filter-chip is-selected" type="button" aria-pressed="true">Todos <span>128</span></button>
+                <button class="filter-chip" type="button" aria-pressed="false">Em andamento</button>
+                <button class="filter-chip" type="button" aria-pressed="false">Concluídas</button>
+                <button class="filter-chip" type="button" aria-pressed="false">Com ocorrência</button>
+              </div>
+            </div>
+            <div class="orders-table-wrap">
+              <table class="orders-table authority-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Entrega</th>
+                    <th scope="col">Data e horário</th>
+                    <th scope="col">Região / destino</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#AX-5821</span></td>
+                    <td data-label="Data e horário" class="authority-date">28/10/2026 <span>09:42</span></td>
+                    <td data-label="Região / destino">Setor Aurora <span class="authority-subcell">Zona de demonstração A</span></td>
+                    <td data-label="Status"><span class="status-tag status-complete"><span aria-hidden="true">●</span> Concluída</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#AX-5820</span></td>
+                    <td data-label="Data e horário" class="authority-date">28/10/2026 <span>09:18</span></td>
+                    <td data-label="Região / destino">Distrito Leste <span class="authority-subcell">Zona de demonstração B</span></td>
+                    <td data-label="Status"><span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#AX-5819</span></td>
+                    <td data-label="Data e horário" class="authority-date">28/10/2026 <span>08:56</span></td>
+                    <td data-label="Região / destino">Núcleo Vale <span class="authority-subcell">Zona de demonstração C</span></td>
+                    <td data-label="Status"><span class="status-tag status-delayed"><span aria-hidden="true">●</span> Com ocorrência</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#AX-5818</span></td>
+                    <td data-label="Data e horário" class="authority-date">28/10/2026 <span>08:31</span></td>
+                    <td data-label="Região / destino">Setor Horizonte <span class="authority-subcell">Zona de demonstração D</span></td>
+                    <td data-label="Status"><span class="status-tag status-complete"><span aria-hidden="true">●</span> Concluída</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Entrega"><span class="order-code">#AX-5817</span></td>
+                    <td data-label="Data e horário" class="authority-date">28/10/2026 <span>08:05</span></td>
+                    <td data-label="Região / destino">Distrito Central <span class="authority-subcell">Zona de demonstração E</span></td>
+                    <td data-label="Status"><span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="demo-data-note">Registros, datas e regiões são fictícios e não representam operações reais.</p>
+          </section>
+
+          <section class="orders-section authority-records" aria-labelledby="authority-flights-title">
+            <div class="orders-heading">
+              <div>
+                <h2 id="authority-flights-title">Registros de voos</h2>
+                <p>Histórico demonstrativo de operações fictícias.</p>
+              </div>
+              <span class="illustrative-badge">SEM INTEGRAÇÃO OFICIAL</span>
+            </div>
+            <div class="orders-table-wrap">
+              <table class="orders-table authority-table flight-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Voo</th>
+                    <th scope="col">Entrega associada</th>
+                    <th scope="col">Região de operação</th>
+                    <th scope="col">Início / término</th>
+                    <th scope="col">Situação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Voo"><span class="order-code">FL-SIM-094</span></td>
+                    <td data-label="Entrega associada">#AX-5821</td>
+                    <td data-label="Região de operação">Setor Aurora</td>
+                    <td data-label="Início / término" class="authority-date">09:14 <span>09:42</span></td>
+                    <td data-label="Situação"><span class="status-tag status-complete"><span aria-hidden="true">●</span> Concluído</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Voo"><span class="order-code">FL-SIM-093</span></td>
+                    <td data-label="Entrega associada">#AX-5820</td>
+                    <td data-label="Região de operação">Distrito Leste</td>
+                    <td data-label="Início / término" class="authority-date">09:26 <span>Em curso</span></td>
+                    <td data-label="Situação"><span class="status-tag status-progress"><span aria-hidden="true">●</span> Em andamento</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Voo"><span class="order-code">FL-SIM-092</span></td>
+                    <td data-label="Entrega associada">#AX-5819</td>
+                    <td data-label="Região de operação">Núcleo Vale</td>
+                    <td data-label="Início / término" class="authority-date">08:41 <span>08:49</span></td>
+                    <td data-label="Situação"><span class="status-tag status-delayed"><span aria-hidden="true">●</span> Interrompido</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Voo"><span class="order-code">FL-SIM-091</span></td>
+                    <td data-label="Entrega associada">#AX-5818</td>
+                    <td data-label="Região de operação">Setor Horizonte</td>
+                    <td data-label="Início / término" class="authority-date">08:02 <span>08:31</span></td>
+                    <td data-label="Situação"><span class="status-tag status-complete"><span aria-hidden="true">●</span> Concluído</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="demo-data-note">Voos ilustrativos; não representam aeronaves ou operações reais nem sistemas oficiais.</p>
+          </section>
+
+          <section class="authority-incidents" aria-labelledby="authority-incidents-title">
+            <div class="orders-heading incident-section-heading">
+              <div>
+                <h2 id="authority-incidents-title">Ocorrências</h2>
+                <p>Eventos fictícios para demonstração da interface.</p>
+              </div>
+              <span class="illustrative-badge">REGISTROS SIMULADOS</span>
+            </div>
+            <div class="incident-grid">
+              <article class="incident-card">
+                <div class="incident-card-top">
+                  <span class="incident-id">OC-SIM-031</span>
+                  <span class="status-tag status-pending"><span aria-hidden="true">●</span> Em análise</span>
+                </div>
+                <h3>Atraso na entrega</h3>
+                <p class="incident-category">Categoria <strong>Atraso operacional</strong></p>
+                <div class="incident-meta"><span>27/10/2026</span><span class="priority-tag priority-high">Prioridade alta</span></div>
+                <button class="view-details-button" type="button" data-incident-details data-id="OC-SIM-031" data-category="Atraso operacional" data-date="27/10/2026" data-priority="Alta" data-status="Em análise" data-description="Entrega demonstrativa com atraso simulado na região Setor Aurora. Nenhuma operação real está associada a este registro.">Ver detalhes <span aria-hidden="true">↗</span></button>
+              </article>
+              <article class="incident-card">
+                <div class="incident-card-top">
+                  <span class="incident-id">OC-SIM-030</span>
+                  <span class="status-tag status-complete"><span aria-hidden="true">●</span> Resolvida</span>
+                </div>
+                <h3>Falha de comunicação simulada</h3>
+                <p class="incident-category">Categoria <strong>Comunicação</strong></p>
+                <div class="incident-meta"><span>26/10/2026</span><span class="priority-tag">Prioridade normal</span></div>
+                <button class="view-details-button" type="button" data-incident-details data-id="OC-SIM-030" data-category="Falha de comunicação simulada" data-date="26/10/2026" data-priority="Normal" data-status="Resolvida" data-description="Registro fictício de uma falha de comunicação simulada no Distrito Leste. O evento não está conectado a dispositivos ou serviços reais.">Ver detalhes <span aria-hidden="true">↗</span></button>
+              </article>
+              <article class="incident-card">
+                <div class="incident-card-top">
+                  <span class="incident-id">OC-SIM-029</span>
+                  <span class="status-tag status-pending"><span aria-hidden="true">●</span> Em análise</span>
+                </div>
+                <h3>Entrega não concluída</h3>
+                <p class="incident-category">Categoria <strong>Entrega</strong></p>
+                <div class="incident-meta"><span>25/10/2026</span><span class="priority-tag">Prioridade normal</span></div>
+                <button class="view-details-button" type="button" data-incident-details data-id="OC-SIM-029" data-category="Entrega não concluída" data-date="25/10/2026" data-priority="Normal" data-status="Em análise" data-description="Entrega demonstrativa marcada como não concluída no Núcleo Vale. Não há destinatários ou dados pessoais associados.">Ver detalhes <span aria-hidden="true">↗</span></button>
+              </article>
+              <article class="incident-card">
+                <div class="incident-card-top">
+                  <span class="incident-id">OC-SIM-028</span>
+                  <span class="status-tag status-complete"><span aria-hidden="true">●</span> Resolvida</span>
+                </div>
+                <h3>Janela de operação excedida</h3>
+                <p class="incident-category">Categoria <strong>Janela de operação</strong></p>
+                <div class="incident-meta"><span>24/10/2026</span><span class="priority-tag priority-high">Prioridade alta</span></div>
+                <button class="view-details-button" type="button" data-incident-details data-id="OC-SIM-028" data-category="Janela de operação excedida" data-date="24/10/2026" data-priority="Alta" data-status="Resolvida" data-description="Ocorrência de demonstração sobre uma janela de operação fictícia excedida no Setor Horizonte.">Ver detalhes <span aria-hidden="true">↗</span></button>
+              </article>
+            </div>
+            <p class="demo-data-note">Ocorrências e respectivos estados são fictícios e não correspondem a registros oficiais.</p>
+          </section>
+        </section>
+
+        <div class="profile-panel" id="generic-profile-panel" hidden>
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> ÁREA DEMONSTRATIVA</p>
+          <h1 id="profile-title" tabindex="-1"></h1>
+          <p class="intro-copy" id="profile-description"></p>
+          <p class="profile-notice">Esta área está sendo preparada. Em breve, você poderá acessar as funcionalidades do seu perfil.</p>
+          <button class="primary-button" type="button" data-back>Voltar à tela inicial</button>
+        </div>
+      </section>
+
+      <dialog class="order-dialog" id="new-order-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">NOVO PEDIDO</p>
+            <h2 id="dialog-title">Dados da entrega</h2>
+          </div>
+          <button class="dialog-close" type="button" data-close-order aria-label="Fechar formulário">×</button>
+        </div>
+        <p class="dialog-description" id="dialog-description">Preencha as informações para preparar uma nova entrega.</p>
+        <form class="order-form">
+          <label for="recipient-input">Nome do destinatário</label>
+          <input id="recipient-input" name="recipient" type="text" placeholder="Ex.: Ana Souza" autocomplete="name">
+
+          <label for="address-input">Endereço de entrega</label>
+          <input id="address-input" name="address" type="text" placeholder="Rua, número, bairro" autocomplete="street-address">
+
+          <label for="priority-input">Prioridade</label>
+          <select id="priority-input" name="priority">
+            <option value="normal">Normal</option>
+            <option value="high">Alta</option>
+          </select>
+
+          <p class="form-message" id="order-message" role="alert" hidden></p>
+
+          <div class="dialog-actions">
+            <button class="secondary-button" type="button" data-close-order>Cancelar</button>
+            <button class="primary-button" type="submit" id="order-submit">Cadastrar pedido</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog class="order-dialog delivery-dialog" id="delivery-dialog" aria-labelledby="delivery-dialog-title">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">DETALHES DA ENTREGA</p>
+            <h2 id="delivery-dialog-title">Informações do pedido</h2>
+          </div>
+          <button class="dialog-close" type="button" data-close-delivery aria-label="Fechar detalhes">×</button>
+        </div>
+        <dl class="delivery-detail-list">
+          <div><dt>Código da entrega</dt><dd id="detail-code"></dd></div>
+          <div><dt>Destinatário</dt><dd id="detail-recipient"></dd></div>
+          <div><dt>Endereço</dt><dd id="detail-address"></dd></div>
+          <div><dt>Prioridade</dt><dd id="detail-priority"></dd></div>
+          <div><dt>Status atual</dt><dd id="detail-status"></dd></div>
+        </dl>
+        <div class="delivery-detail-placeholder">
+          <span class="placeholder-icon" aria-hidden="true">＋</span>
+          <span><strong id="detail-extra-title">Informações adicionais</strong><small id="detail-extra-text">Drone, base e último evento da entrega.</small></span>
+        </div>
+        <p class="form-message" id="delivery-message" role="alert" hidden></p>
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" id="delivery-cancel-button" hidden>Cancelar entrega</button>
+          <button class="primary-button" type="button" id="delivery-start-button" hidden>Iniciar entrega</button>
+          <button class="secondary-button" type="button" data-close-delivery>Fechar</button>
+        </div>
+      </dialog>
+
+      <dialog class="order-dialog incident-dialog" id="incident-dialog" aria-labelledby="incident-dialog-title">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">REGISTRO DEMONSTRATIVO</p>
+            <h2 id="incident-dialog-title">Detalhes da ocorrência</h2>
+          </div>
+          <button class="dialog-close" type="button" data-close-incident aria-label="Fechar detalhes da ocorrência">×</button>
+        </div>
+        <dl class="delivery-detail-list">
+          <div><dt>Identificador</dt><dd id="incident-detail-id"></dd></div>
+          <div><dt>Categoria</dt><dd id="incident-detail-category"></dd></div>
+          <div><dt>Data</dt><dd id="incident-detail-date"></dd></div>
+          <div><dt>Prioridade</dt><dd id="incident-detail-priority"></dd></div>
+          <div><dt>Situação</dt><dd id="incident-detail-status"></dd></div>
+        </dl>
+        <p class="incident-detail-description" id="incident-detail-description"></p>
+        <p class="tracking-disclaimer">Informações fictícias para demonstração. Este painel não consulta sistemas oficiais.</p>
+        <p class="form-message" id="incident-message" role="alert" hidden></p>
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" id="incident-review-button" hidden>Marcar em análise</button>
+          <button class="primary-button" type="button" id="incident-resolve-button" hidden>Marcar como resolvida</button>
+          <button class="secondary-button" type="button" data-close-incident>Fechar</button>
+        </div>
+      </dialog>
+
+      <footer class="site-footer">
+        <span>© 2026 ROVIX</span>
+        <span>TECNOLOGIA QUE APROXIMA DESTINOS</span>
+      </footer>
+    </main>
+  </body>
+</html>
