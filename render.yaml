@@ -1,0 +1,16 @@
+# Publicação no Render (plano gratuito): o servidor entrega a API e o front (pasta "front") juntos.
+services:
+  - type: web
+    name: rovix
+    runtime: node
+    plan: free
+    buildCommand: rm -rf node_modules data && npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: STATIC_DIR
+        value: front
+      - key: JWT_SECRET
+        generateValue: true
